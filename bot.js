@@ -20,20 +20,12 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
       
-
-  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-    if (!row) {
-      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
-        
-      message.channel.send("hecho");
-    } 
-  }).catch(() => {
-    console.error;
-    sql.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName VARCHAR(40))").then(() => {
-      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
-        message.channel.send("hecho");
-    });
-  });
+    db.query('CREATE TABLE IF NOT EXISTS nicks (userId VARCHAR(40), charName VARCHAR(40))', (err, res) => {
+        if (err) {
+          
+        }
+        console.log(res);
+    });  
     
     return;
   }
