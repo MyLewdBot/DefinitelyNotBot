@@ -10,9 +10,9 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
-const res = await client.query('SELECT $1::text as message', ['Hello world!']);
+const res = await client2.query('SELECT $1::text as message', ['Hello world!']);
 console.log(res.rows[0].message); // Hello world!
-await client.end();
+await client2.end();
 
 // Set the prefix
 const prefix = "!";
