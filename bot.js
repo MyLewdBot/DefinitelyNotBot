@@ -21,16 +21,16 @@ client.on("message", (message) => {
     var args = message.content.split(" ");
       
 
-  client.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
-      client.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
+      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
         
       message.channel.send("hecho");
     } 
   }).catch(() => {
     console.error;
-    client.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName VARCHAR(40))").then(() => {
-      client.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
+    sql.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName VARCHAR(40))").then(() => {
+      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
         message.channel.send("hecho");
     });
   });
