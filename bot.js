@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const sql = require("sqlite");
-sql.open("./nick.sqlite");
+sql.open("./nicks.sqlite");
 
 client.on('ready', () => {
     console.log('I am ready!');
