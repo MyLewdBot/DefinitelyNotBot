@@ -14,7 +14,8 @@ client.on("message", (message) => {
 
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
-    message.channel.send(args);
+    message.channel.send(args[1]);
+    return;
   }
 });
 
