@@ -25,7 +25,7 @@ client.on("message", (message) => {
    }).catch(() => {
     console.error;
     sql.query("CREATE TABLE IF NOT EXISTS nicks (userId VARCHAR(40), charName VARCHAR(40))").then(() => {
-      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1]]);
+      sql.query("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1]]);
     });
   });
 
