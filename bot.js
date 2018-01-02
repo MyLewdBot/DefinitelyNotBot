@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({
+const client = new Discord.Client();
+const sql = require("pg");
+const sql = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
@@ -7,6 +9,8 @@ const client = new Discord.Client({
 client.on('ready', () => {
     console.log('I am ready!');
 });
+
+sql.connect();
 
 // Set the prefix
 const prefix = "!";
@@ -17,7 +21,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
       
-
+/*
   client.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     if (!row) {
       client.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
@@ -30,7 +34,7 @@ client.on("message", (message) => {
       client.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
         message.channel.send("hecho");
     });
-  });
+  });*/
     
     return;
   }
