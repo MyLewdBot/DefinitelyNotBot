@@ -4,8 +4,6 @@ const client = new Discord.Client({
   ssl: true,
 });
 
-client.connect();
-
 client.on('ready', () => {
     console.log('I am ready!');
 });
