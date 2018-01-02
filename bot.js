@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
+const sql = require("sqlite");
+sql.open("./nick.sqlite");
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -14,7 +15,22 @@ client.on("message", (message) => {
 
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
-    message.channel.send(args[1]);
+      
+      
+  sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
+        
+      message.channel.send("hecho");
+    } 
+  }).catch(() => {
+    console.error;
+    sql.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName TEXT)").then(() => {
+      sql.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
+        message.channel.send("hecho");
+    });
+  });
+      
     return;
   }
 });
