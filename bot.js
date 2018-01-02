@@ -7,6 +7,10 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
+
+const client2 = new pg.Client(connectionString);
+client2.connect();
+
 // Set the prefix
 const prefix = "!";
 client.on("message", (message) => {
@@ -25,7 +29,7 @@ client.on("message", (message) => {
     } 
   }).catch(() => {
     console.error;
-    client.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName TEXT)").then(() => {
+    client.run("CREATE TABLE IF NOT EXISTS nicks (userId TEXT, charName VARCHAR(40))").then(() => {
       client.run("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1] ]);
         message.channel.send("hecho");
     });
