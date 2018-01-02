@@ -8,8 +8,8 @@ client.on('ready', () => {
 });
 
 
-const client2 = new pg.Client(connectionString);
-client2.connect();
+const sql = new pg.Client(connectionString);
+sql.connect();
 
 // Set the prefix
 const prefix = "!";
