@@ -20,7 +20,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
       
-    db.query('CREATE TABLE IF NOT EXISTS nicks (userId VARCHAR(40), charName VARCHAR(40))', (err, res) => {
+   sql.query('CREATE TABLE IF NOT EXISTS nicks (userId VARCHAR(40), charName VARCHAR(40))', (err, res) => {
         if (err) {
           
         }
