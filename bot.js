@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
+const { Client } = require('pg');
+
 const client = new Discord.Client();
-const sql = require("pg");
+
 const sql = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
