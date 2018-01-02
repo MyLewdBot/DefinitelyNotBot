@@ -1,18 +1,18 @@
 const Discord = require('discord.js');
-const { Client } = require('pg');
-
 const client = new Discord.Client();
 
-const sql = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+const { Client } = require('pg');
+const client2 = new Client();
+
+await client2.connect();
 
 client.on('ready', () => {
     console.log('I am ready!');
 });
 
-sql.connect();
+const res = await client.query('SELECT $1::text as message', ['Hello world!']);
+console.log(res.rows[0].message); // Hello world!
+await client.end();
 
 // Set the prefix
 const prefix = "!";
