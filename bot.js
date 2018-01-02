@@ -1,5 +1,10 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
 
 client.on('ready', () => {
     console.log('I am ready!');
