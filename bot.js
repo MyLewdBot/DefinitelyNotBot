@@ -46,7 +46,7 @@ client.on("message", (message) => {
       } else {
         message.channel.send("Borrada!");
       }
-    })
+    });
 
     return;
   }
@@ -65,13 +65,29 @@ client.on("message", (message) => {
         } else {
           message.channel.send("Personajes:"+row);
         }
-      })
+      });
 
     return;
   }
 });
 
+client.on("message", (message) => {
+  // Exit and stop if it's not there
+  if (!message.content.startsWith(prefix)) return;
 
+  if (message.content.startsWith(prefix + "charsAll")) {
+      
+    sql.query(`SELECT * FROM nicks"`).then(row => {
+        if (!row) {
+          message.channel.send("no hay personajes!");  
+        } else {
+          message.channel.send("Personajes:"+row);
+        }
+      });
+
+    return;
+  }
+});
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
