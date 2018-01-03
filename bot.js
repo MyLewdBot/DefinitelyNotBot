@@ -36,9 +36,12 @@ client.on("message", message => {
     
     if (message.content.startsWith(prefix + "pjAll")) {
       
-        var getUserInfoQuery = sql.query('SELECT * FROM nicks');
-        getUserInfoQuery.done(function(userInfo) {
-            console.log(userInfo[0].userId);
+        var getUserInfoQuery = sql.query('SELECT * FROM nicks'), (err, res) => {
+            if (err) {
+                message.channel.send("no existe!");  
+            }else{
+                message.channel.send(res.rowCount);  
+            }
         });
         
         return;
