@@ -61,7 +61,10 @@ client.on("message", (message) => {
         } else {
           message.channel.send("Personajes:"+row);
         }
-      })
+      }).catch(() => {
+        console.error;
+            
+      });
 
     return;
   }
