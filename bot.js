@@ -36,12 +36,11 @@ client.on("message", message => {
     
     if (message.content.startsWith(prefix + "pjAll")) {
       
-        sql.query('SELECT * FROM nicks', (err, res) => {
-            if (err) {
-                message.channel.send("no existe!");  
+        sql.query('SELECT * FROM nicks').then(row => {
+            if (!row) {
+                message.channel.send("no hay personajes!");  
             } else {
-                message.channel.send("Row count: %d",res.length);  // n
-               
+                message.channel.send(`${row.userId} ${row.pj}`);
             }
         });
         
