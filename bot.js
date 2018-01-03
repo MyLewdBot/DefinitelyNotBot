@@ -77,7 +77,7 @@ client.on("message", (message) => {
 
   if (message.content.startsWith(prefix + "charsAll")) {
       
-    sql.query(`SELECT * FROM nicks"`).then(row => {
+    sql.query(`SELECT * FROM nicks`).then(row => {
         if (!row) {
           message.channel.send("no hay personajes!");  
         } else {
