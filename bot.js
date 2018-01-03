@@ -11,18 +11,6 @@ client.on('ready', () => {
 const sql = new pg.Client(connectionString);
 sql.connect();
 
-
-
-/*
-    sql.query('SELECT * FROM nicks', (err, res) => {
-      if (err) {
-        sql.query("CREATE TABLE IF NOT EXISTS nicks (userId varchar(64), character varchar(64))");
-          sql.query("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
-        message.channel.send("Agregado!");  
-      } else {
-        message.channel.send("Personajes");
-      }
-    })*/
 // Set the prefix
 const prefix = "!";
 client.on("message", message => {
@@ -60,6 +48,26 @@ client.on("message", (message) => {
     return;
   }
 });
+
+client.on("message", (message) => {
+  // Exit and stop if it's not there
+  if (!message.content.startsWith(prefix)) return;
+
+  if (message.content.startsWith(prefix + "chars")) {
+   
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+        if (!row) {
+          message.channel.send("no tiene personajes!");  
+        } else {
+          message.channel.send("Personajes:"+row);
+        }
+      })
+
+    return;
+  }
+});
+
+
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
