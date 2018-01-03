@@ -21,7 +21,7 @@ client.on("message", message => {
     if (message.content.startsWith(prefix + "pj")) {
         var args = message.content.split(" ");
       
-        sql.query("CREATE TABLE IF NOT EXISTS nicks(userId varchar(64), pj varchar(64))");
+        sql.query("CREATE TABLE IF NOT EXISTS nicks(userId TEXT, pj TEXT)");
         sql.query("INSERT INTO nicks(userId, pj) values($1, $2)", [message.author.id, args[1]]);
         
         message.channel.send("done!");  
@@ -40,7 +40,7 @@ client.on("message", message => {
             if (!row) {
                 message.channel.send("no hay personajes!");  
             } else {
-                message.channel.send(row.userId+" "+row.pj);
+                message.channel.send(row[0].userId+" "+row[0].pj);
             }
         });
         
