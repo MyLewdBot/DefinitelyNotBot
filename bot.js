@@ -36,13 +36,16 @@ client.on("message", message => {
     
     if (message.content.startsWith(prefix + "pjAll")) {
       
-        sql.query('SELECT * FROM nicks', (err, res) => {
-            if (err) {
-                message.channel.send("no existe!");  
-            }else if ( res.rows.length > 0 ) {
-                var ttmp = res.rows[0];
+        sql.query('SELECT * FROM nicks', (err, result) => {
+            if ( err ) {
+                callback(err);
+            } else if ( result.rows.length > 0 ) {
+                var ttmp = result.rows[0];
                 var tmp1 = ttmp[0];
                 console.log("Res[0]: " + tmp1);
+                callback(err,result.rows[0]);
+            } else {
+                callback(err);
             }
         });
         
