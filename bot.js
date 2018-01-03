@@ -63,7 +63,7 @@ client.on("message", (message) => {
         if (!row) {
           message.channel.send("no tiene personajes!");  
         } else {
-          message.channel.send("Personajes:"+row.character);
+          message.channel.send("Personajes: "+row.character);
         }
       });
 
@@ -81,7 +81,7 @@ client.on("message", (message) => {
         if (!row) {
           message.channel.send("no hay personajes!");  
         } else {
-          message.channel.send("Personajes:"+" "+row.userId+" "+row.character);
+          message.reply(`asd ${row.character}`);
         }
       });
 
