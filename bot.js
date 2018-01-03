@@ -35,25 +35,16 @@ client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
     
     if (message.content.startsWith(prefix + "pjAll")) {
-      /*
+      
         sql.query('SELECT * FROM nicks', (err, result) => {
             if ( err ) {
                 message.channel.send(err);
             } else if ( result.rows.length > 0 ) {
                 message.channel.send(result.rows.length);
-            } else {
-                message.channel.send(err);
-            }
-        });*/
+                 message.channel.send(result.rows);
+            } 
+        });
         
-        sql.query('SELECT * FROM nicks' ,(err,res) {
-           if(err){
-                message.channel.send(err);
-           } else {
-                message.channel.send(res.rows);
-           }
-           
-       });
         
         return;
     }
