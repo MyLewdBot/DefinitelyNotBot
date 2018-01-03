@@ -23,7 +23,7 @@ client.on("message", message => {
         var args = message.content.split(" ");
       
         sql.query("CREATE TABLE IF NOT EXISTS nicks(userId varchar(40) primary key, pj varchar(40) NOT NULL)");
-        sql.query("INSERT INTO nicks(userId, pj) values($1, $2)", [message.author.id, args[1]]);
+        sql.query("INSERT INTO nicks(userId, pj) values(?, ?)", [message.author.id, args[1]]);
         
         message.channel.send("done!");  
         
