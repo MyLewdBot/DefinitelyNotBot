@@ -54,7 +54,8 @@ client.on("message", (message) => {
   if (!message.content.startsWith(prefix)) return;
 
   if (message.content.startsWith(prefix + "chars")) {
-   
+    var args = message.content.split(" ");
+      
     sql.get(`SELECT * FROM scores WHERE userId ="${args[1]}"`).then(row => {
         if (!row) {
           message.channel.send("no tiene personajes!");  
