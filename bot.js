@@ -28,6 +28,9 @@ client.on("message", message => {
               sql.query("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
             });
         });
+         
+        message.channel.send("done!");  
+        return;
     }
 });
 
@@ -56,7 +59,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "chars")) {
     var args = message.content.split(" ");
       
-    sql.query(`SELECT * FROM scores WHERE userId ="${args[1]}"`).then(row => {
+    sql.query(`SELECT * FROM nicks WHERE userId ="${args[1]}"`).then(row => {
         if (!row) {
           message.channel.send("no tiene personajes!");  
         } else {
