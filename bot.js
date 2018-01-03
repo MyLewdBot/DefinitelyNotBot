@@ -21,7 +21,7 @@ client.on("message", message => {
     if (message.content.startsWith(prefix + "pj")) {
         var args = message.content.split(" ");
       
-        sql.query("CREATE TABLE IF NOT EXISTS nicks(userId TEXT, pj TEXT)");
+        sql.query("CREATE TABLE IF NOT EXISTS nicks(userId varchar(64), pj varchar(64))");
         sql.query("INSERT INTO nicks(userId, pj) values($1, $2)", [message.author.id, args[1]]);
         
         message.channel.send("done!");  
@@ -46,9 +46,14 @@ client.on("message", message => {
             }
         });*/
         
-        sql.query("SELECT * FROM nicks", (data) {
-            console.log(data);
-        });
+        sql.query('SELECT * FROM nicks' ,(err,res) {
+           if(err){
+                message.channel.send(err);
+           } else {
+                message.channel.send(res.rows);
+           }
+           
+       });
         
         return;
     }
