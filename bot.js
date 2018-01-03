@@ -41,10 +41,9 @@ client.on("message", message => {
                 message.channel.send(err);
             } else if ( result.rows.length > 0 ) {
                 message.channel.send(result.rows.length);
-                var ttmp = result.rows[1];
+                var ttmp = result.rows[0];
                 var tmp1 = ttmp[0];
-                console.log("Res[1]: " + tmp1);
-                message.channel.send(err,result.rows[1]);
+                message.channel.send("Res[0]: " + tmp1);
             } else {
                 message.channel.send(err);
             }
