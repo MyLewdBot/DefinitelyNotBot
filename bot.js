@@ -17,18 +17,16 @@ client.on("message", (message) => {
   // Exit and stop if it's not there
   if (!message.content.startsWith(prefix)) return;
 
-  if (message.content.startsWith(prefix + "nick")) {
+  if (message.content.startsWith(prefix + "personaje")) {
     var args = message.content.split(" ");
    
     sql.query('SELECT * FROM nicks', (err, res) => {
       if (err) {
-        message.channel.send("error!");  
-        console.log(err.stack);
-        
+        sql.query("CREATE TABLE IF NOT EXISTS nicks (userId varchar(64), character varchar(64))");
+          sql.run("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[]1]);
+        message.channel.send("Agregado!");  
       } else {
-        message.channel.send("Tabla:");
-        console.log(res.rows);
-        
+        message.channel.send("Personajes");
       }
     })
 
