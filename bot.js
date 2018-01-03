@@ -40,7 +40,7 @@ client.on("message", message => {
             if (!row) {
                 message.channel.send("no hay personajes!");  
             } else {
-                message.channel.send(row[0].userId+" "+row[0].pj);
+                message.channel.send(row[0]);
             }
         });
         
