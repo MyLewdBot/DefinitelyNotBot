@@ -26,31 +26,32 @@ client.on("message", (message) => {
         console.log(err.stack);
         
       } else {
-        message.channel.send("Tabla:!");
+        message.channel.send("Tabla:");
         console.log(res.rows);
         
       }
     })
-        /* 
-   sql.query(`SELECT * FROM nicks WHERE userId ="${message.author.id}"`)
-    .then(user => {
-        console.log(user.name); // print user name;
-    })
-    .catch(error => {
-        console.log(error); // print the error;
-    });   
-      
-   
-   sql.query(`SELECT * FROM nicks WHERE userId ="${message.author.id}"`).then(() => {
-      sql.query("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1]]);
-   }).catch(() => {
-    console.error;
-    sql.query("CREATE TABLE IF NOT EXISTS nicks (userId VARCHAR(40), charName VARCHAR(40))").then(() => {
-      sql.query("INSERT INTO nicks (userId, charName) VALUES (?, ?)", [message.author.id, args[1]]);
-    });
-  });
 
-    */
+    return;
+  }
+});
+
+client.on("message", (message) => {
+  // Exit and stop if it's not there
+  if (!message.content.startsWith(prefix)) return;
+
+  if (message.content.startsWith(prefix + "deleteAll")) {
+   
+    sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
+      if (err) {
+        message.channel.send("error!");  
+        console.log(err.stack);
+        
+      } else {
+        message.channel.send("Borrada!");
+      }
+    })
+
     return;
   }
 });
