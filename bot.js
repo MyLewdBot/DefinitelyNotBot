@@ -38,14 +38,14 @@ client.on("message", message => {
       
         sql.query('SELECT * FROM nicks', (err, result) => {
             if ( err ) {
-                callback(err);
+                message.channel.send(err);
             } else if ( result.rows.length > 0 ) {
                 var ttmp = result.rows[0];
                 var tmp1 = ttmp[0];
                 console.log("Res[0]: " + tmp1);
-                callback(err,result.rows[0]);
+                message.channel.send(err,result.rows[0]);
             } else {
-                callback(err);
+                message.channel.send(err);
             }
         });
         
@@ -60,7 +60,7 @@ client.on("message", (message) => {
     if (message.content.startsWith(prefix + "delAll")) {
         sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
             if (err) {
-                message.channel.send("no existe!");  
+                message.channel.send(err);  
             }else{
                 message.channel.send("borrados!");  
             }
