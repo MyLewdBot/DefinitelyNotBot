@@ -43,7 +43,7 @@ client.on("message", message => {
                 message.channel.send(result.rows.length);
                 var ttmp = result.rows[0];
                 var tmp1 = ttmp[0];
-                message.channel.send("Res[0]: " + tmp1);
+                message.channel.send("Res[0]: " + tmp1.pj);
             } else {
                 message.channel.send(err);
             }
