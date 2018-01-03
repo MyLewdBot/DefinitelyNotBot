@@ -40,7 +40,7 @@ client.on("message", message => {
             if (err) {
                 message.channel.send("no existe!");  
             }else{
-                message.channel.send(res.row[0]);  
+                message.channel.send(res);  
             }
         });
         
