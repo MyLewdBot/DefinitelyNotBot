@@ -20,11 +20,13 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
    
-  const query = sql.query('SELECT * FROM nicks');
-  // Stream results back one row at a time
-  query.on('row', (row) => {
-    results.push(row);
-  });
+    sql.query('SELECT * FROM nicks', (err, res) => {
+      if (err) {
+        console.log(err.stack)
+      } else {
+        console.log(res.rows[0])
+      }
+    })
         /* 
    sql.query(`SELECT * FROM nicks WHERE userId ="${message.author.id}"`)
     .then(user => {
