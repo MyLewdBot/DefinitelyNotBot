@@ -20,7 +20,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(prefix + "nick")) {
     var args = message.content.split(" ");
    
-  const query = client.query('SELECT * FROM nicks');
+  const query = sql.query('SELECT * FROM nicks');
   // Stream results back one row at a time
   query.on('row', (row) => {
     results.push(row);
