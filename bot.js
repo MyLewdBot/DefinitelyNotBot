@@ -36,7 +36,7 @@ client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
     
     if (message.content.startsWith(prefix + "pjAll")) {
-      
+      /*
         sql.query('SELECT * FROM nicks', (err, result) => {
             if ( err ) {
                 message.channel.send(err);
@@ -45,7 +45,11 @@ client.on("message", message => {
                 message.channel.send(result.rows);
             } 
         });
-        
+        */
+        sql.query(`SELECT * FROM nicks`).then(row => {
+          if (!row) return;
+          message.reply(`Your current level is ${row.pj}`);
+        });
         
         return;
     }
