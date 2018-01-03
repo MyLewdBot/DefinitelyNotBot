@@ -36,12 +36,9 @@ client.on("message", message => {
     
     if (message.content.startsWith(prefix + "pjAll")) {
       
-        sql.query('SELECT * FROM nicks').then(row => {
-            if (!row) {
-                message.channel.send("no hay personajes!");  
-            } else {
-                message.channel.send(row[0]);
-            }
+        var getUserInfoQuery = sql.query('SELECT * FROM nicks');
+        getUserInfoQuery.done(function(userInfo) {
+            console.log(userInfo[0].userId);
         });
         
         return;
