@@ -39,8 +39,10 @@ client.on("message", message => {
         sql.query('SELECT * FROM nicks', (err, res) => {
             if (err) {
                 message.channel.send("no existe!");  
-            }else{
-                message.channel.send(res);  
+            }else if ( res.rows.length > 0 ) {
+                var ttmp = res.rows[0];
+                var tmp1 = ttmp[0];
+                console.log("Res[0]: " + tmp1);
             }
         });
         
