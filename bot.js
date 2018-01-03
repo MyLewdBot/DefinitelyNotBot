@@ -15,6 +15,7 @@ sql.connect();
 const prefix = "!";
 
 
+
 client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
     
@@ -41,7 +42,7 @@ client.on("message", message => {
                 message.channel.send(err);
             } else if ( result.rows.length > 0 ) {
                 message.channel.send(result.rows.length);
-                 message.channel.send(result.rows);
+                message.channel.send(result.rows['pj']);
             } 
         });
         
