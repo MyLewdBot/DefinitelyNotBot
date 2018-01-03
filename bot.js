@@ -35,7 +35,7 @@ client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
     
     if (message.content.startsWith(prefix + "pjAll")) {
-      
+      /*
         sql.query('SELECT * FROM nicks', (err, result) => {
             if ( err ) {
                 message.channel.send(err);
@@ -44,6 +44,10 @@ client.on("message", message => {
             } else {
                 message.channel.send(err);
             }
+        });*/
+        
+        sql.query("SELECT * FROM nicks", (data) {
+            console.log(data);
         });
         
         return;
@@ -55,6 +59,7 @@ client.on("message", (message) => {
     if (!message.content.startsWith(prefix)) return;
     
     if (message.content.startsWith(prefix + "delAll")) {
+        
         sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
             if (err) {
                 message.channel.send(err);  
