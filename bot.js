@@ -55,7 +55,7 @@ client.on("message", (message) => {
 
   if (message.content.startsWith(prefix + "chars")) {
    
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    sql.get(`SELECT * FROM scores WHERE userId ="${args[1]}"`).then(row => {
         if (!row) {
           message.channel.send("no tiene personajes!");  
         } else {
