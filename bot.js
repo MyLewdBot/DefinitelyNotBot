@@ -36,13 +36,32 @@ client.on("message", message => {
     
     if (message.content.startsWith(prefix + "pjAll")) {
       
-        var getUserInfoQuery = sql.query('SELECT * FROM nicks');
-        
-        getUserInfoQuery.done(function(rows) {
-            message.channel.send(rows);  
+        sql.query('SELECT * FROM nicks', (err, res) => {
+            if (err) {
+                message.channel.send("no existe!");  
+            } else {
+                message.channel.send("lista: "+res);
+            }
         });
         
         message.channel.send("done!");  
+        
+        return;
+    }
+});
+
+
+client.on("message", (message) => {
+    if (!message.content.startsWith(prefix)) return;
+    
+    if (message.content.startsWith(prefix + "delAll")) {
+        sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
+            if (err) {
+                message.channel.send("no existe!");  
+            }
+        });
+        
+        message.channel.send("borrados!");  
         
         return;
     }
