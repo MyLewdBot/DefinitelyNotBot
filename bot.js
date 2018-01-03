@@ -19,7 +19,20 @@ client.on("message", (message) => {
 
   if (message.content.startsWith(prefix + "personaje")) {
     var args = message.content.split(" ");
-   
+      
+    sql.query(`SELECT * FROM nicks WHERE userId ="${message.author.id}"`).then(row => {
+    if (!row) {
+      sql.run("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
+    }
+  }).catch(() => {
+    console.error;
+    sql.query("CREATE TABLE IF NOT EXISTS nicks (userId varchar(64), character varchar(64))").then(() => {
+      sql.query("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
+    });
+  });
+});
+    
+   /*
     sql.query('SELECT * FROM nicks', (err, res) => {
       if (err) {
         sql.query("CREATE TABLE IF NOT EXISTS nicks (userId varchar(64), character varchar(64))");
@@ -28,7 +41,7 @@ client.on("message", (message) => {
       } else {
         message.channel.send("Personajes");
       }
-    })
+    })*/
 
     return;
   }
