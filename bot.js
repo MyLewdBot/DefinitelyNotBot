@@ -23,7 +23,7 @@ client.on("message", (message) => {
     sql.query('SELECT * FROM nicks', (err, res) => {
       if (err) {
         sql.query("CREATE TABLE IF NOT EXISTS nicks (userId varchar(64), character varchar(64))");
-          sql.run("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
+          sql.query("INSERT INTO nicks (userId, character) VALUES (?, ?)", [message.author.id, args[1]]);
         message.channel.send("Agregado!");  
       } else {
         message.channel.send("Personajes");
@@ -43,8 +43,6 @@ client.on("message", (message) => {
     sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
       if (err) {
         message.channel.send("error!");  
-        console.log(err.stack);
-        
       } else {
         message.channel.send("Borrada!");
       }
