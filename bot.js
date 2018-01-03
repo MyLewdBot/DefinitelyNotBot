@@ -22,9 +22,13 @@ client.on("message", (message) => {
    
     sql.query('SELECT * FROM nicks', (err, res) => {
       if (err) {
-        console.log(err.stack)
+        message.channel.send("error!");  
+        console.log(err.stack);
+        
       } else {
-        console.log(res.rows[0])
+        message.channel.send("Tabla:!");
+        console.log(res.rows);
+        
       }
     })
         /* 
