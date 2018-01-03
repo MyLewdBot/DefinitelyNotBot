@@ -40,11 +40,9 @@ client.on("message", message => {
             if (err) {
                 message.channel.send("no existe!");  
             } else {
-                message.channel.send("lista: "+res);
+                message.channel.send("lista: "+res.pj);
             }
         });
-        
-        message.channel.send("done!");  
         
         return;
     }
@@ -58,10 +56,12 @@ client.on("message", (message) => {
         sql.query('DROP TABLE IF EXISTS nicks', (err, res) => {
             if (err) {
                 message.channel.send("no existe!");  
+            }else{
+                message.channel.send("borrados!");  
             }
         });
         
-        message.channel.send("borrados!");  
+        
         
         return;
     }
